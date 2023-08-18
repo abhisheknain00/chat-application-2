@@ -7,11 +7,16 @@ import { Loader } from 'rsuite';
 import { CurrentRoomProvider } from '../../context/current-room.context';
 import { transformToArr } from '../../misc/Helper';
 import { auth } from '../../misc/firebase';
+import { useEffect } from 'react';
 
 const Chat = () => {
   const { chatId } = useParams();
 
   const rooms = useRoom();
+
+  useEffect(() => {
+    window.chatId = chatId;
+  }, [chatId]);
 
   if (!rooms) {
     return <Loader center vertical size="md" content="Loading" speed="slow" />;
